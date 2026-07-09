@@ -18,6 +18,7 @@ const char* VehicleEFIFactGroup::_injTimeFactName =         "injTime";
 const char* VehicleEFIFactGroup::_exGasTempFactName =       "exGasTemp";
 const char* VehicleEFIFactGroup::_throttleOutFactName =     "throttleOut";
 const char* VehicleEFIFactGroup::_ptCompFactName =          "ptComp";
+const char* VehicleEFIFactGroup::_updateCountFactName =     "updateCount";
 
 
 VehicleEFIFactGroup::VehicleEFIFactGroup(QObject* parent)
@@ -39,6 +40,7 @@ VehicleEFIFactGroup::VehicleEFIFactGroup(QObject* parent)
     , _exGasTempFact        (0, _exGasTempFactName,         FactMetaData::valueTypeFloat)
     , _throttleOutFact      (0, _throttleOutFactName,       FactMetaData::valueTypeFloat)
     , _ptCompFact           (0, _ptCompFactName,            FactMetaData::valueTypeFloat)
+    , _updateCountFact      (0, _updateCountFactName,       FactMetaData::valueTypeUint32)
 {
     _addFact(&_healthFact,          _healthFactName);
     _addFact(&_ecuIndexFact,        _ecuIndexFactName);
@@ -57,6 +59,7 @@ VehicleEFIFactGroup::VehicleEFIFactGroup(QObject* parent)
     _addFact(&_injTimeFact,         _injTimeFactName);
     _addFact(&_throttleOutFact,     _throttleOutFactName);
     _addFact(&_ptCompFact,          _ptCompFactName);
+    _addFact(&_updateCountFact,     _updateCountFactName);
 
     // Start out as not available "--.--"
     _healthFact.setRawValue(qQNaN());
@@ -111,4 +114,8 @@ void VehicleEFIFactGroup::_handleEFIStatus(mavlink_message_t& message)
     exGasTemp()->setRawValue        (efi.exhaust_gas_temperature);
     throttleOut()->setRawValue      (efi.throttle_out);
     ptComp()->setRawValue           (efi.pt_compensation);
+
+    // 心跳计数: 每收到一帧 EFI_STATUS 自增, QML 用它判断链路新鲜度
+    updateCount()->setRawValue(updateCount()->rawValue().toUInt() + 1);
+    _setTelemetryAvailable(true);
 }

@@ -4,6 +4,11 @@
     "QGC.MetaData.Facts":
 [
 {
+    "name":             "updateCount",
+    "shortDesc":        "Update Count",
+    "type":             "uint32"
+},
+{
     "name":             "health",
     "shortDesc":        "Health",
     "type":             "int8"

@@ -28,6 +28,7 @@ public:
     Q_PROPERTY(Fact* throttleOut    READ throttleOut    CONSTANT)
     Q_PROPERTY(Fact* ptComp         READ ptComp         CONSTANT)
     Q_PROPERTY(Fact* ignVoltage     READ ignVoltage     CONSTANT)
+    Q_PROPERTY(Fact* updateCount    READ updateCount    CONSTANT)
 
     Fact* health        () { return &_healthFact; }
     Fact* ecuIndex      () { return &_ecuIndexFact; }
@@ -47,6 +48,7 @@ public:
     Fact* throttleOut   () { return &_throttleOutFact; }
     Fact* ptComp        () { return &_ptCompFact; }
     Fact* ignVoltage    () { return &_ignVoltageFact; }
+    Fact* updateCount   () { return &_updateCountFact; }
 
     // Overrides from FactGroup
     virtual void handleMessage(Vehicle* vehicle, mavlink_message_t& message) override;
@@ -69,6 +71,7 @@ public:
     static const char* _throttleOutFactName;
     static const char* _ptCompFactName;
     static const char* _ignVoltageFactName;
+    static const char* _updateCountFactName;
 
 protected:
     void _handleEFIStatus(mavlink_message_t& message);
@@ -91,4 +94,5 @@ protected:
     Fact _throttleOutFact;
     Fact _ptCompFact;
     Fact _ignVoltageFact;
+    Fact _updateCountFact;
 };

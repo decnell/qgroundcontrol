@@ -750,6 +750,7 @@ HEADERS += \
     src/Vehicle/VehicleHygrometerFactGroup.h \
     src/Vehicle/VehicleGeneratorFactGroup.h \
     src/Vehicle/VehicleEFIFactGroup.h \
+    src/Vehicle/VehicleFuelFactGroup.h \
     src/VehicleSetup/JoystickConfigController.h \
     src/comm/LinkConfiguration.h \
     src/comm/LinkInterface.h \
@@ -1010,6 +1011,7 @@ SOURCES += \
     src/Vehicle/VehicleHygrometerFactGroup.cc \
     src/Vehicle/VehicleGeneratorFactGroup.cc \
     src/Vehicle/VehicleEFIFactGroup.cc \
+    src/Vehicle/VehicleFuelFactGroup.cc \
     src/Vehicle/VehicleWindFactGroup.cc \
     src/VehicleSetup/JoystickConfigController.cc \
     src/comm/LinkConfiguration.cc \
