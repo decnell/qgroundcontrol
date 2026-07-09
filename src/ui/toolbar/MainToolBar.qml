@@ -185,3 +185,5 @@ Rectangle {
         }
     }
 }
+
+// SG-60 custom build
